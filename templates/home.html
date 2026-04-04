@@ -1,1 +1,137 @@
-<h1>Hello Minhal</h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Boston House Price Predictor</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0d1d60, #7490fd);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #333;
+    }
+
+    .container {
+      background: #fff;
+      padding: 10px;
+      border-radius: 16px;
+      width: 420px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 22px;
+      font-weight: 600;
+      color: #444;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    input {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 5px rgba(102,126,234,0.5);
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background: #667eea;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #5a67d8;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      background: #f1f5ff;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .footer {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #aaa;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>🏠 Boston House Price Predictor</h1>
+
+    <form action="{{ url_for('predict') }}" method="post">
+      
+      <div class="form-grid">
+        <input type="text" name="CRIM" placeholder="CRIM" required>
+        <input type="text" name="ZN" placeholder="ZN" required>
+        <input type="text" name="INDUS" placeholder="INDUS" required>
+        <input type="text" name="CHAS" placeholder="CHAS" required>
+        <input type="text" name="NOX" placeholder="NOX" required>
+        <input type="text" name="RM" placeholder="RM" required>
+        <input type="text" name="Age" placeholder="Age" required>
+        <input type="text" name="DIS" placeholder="DIS" required>
+        <input type="text" name="TAX" placeholder="TAX" required>
+        <input type="text" name="PTRATIO" placeholder="PTRATIO" required>
+        <input type="text" name="B" placeholder="B" required>
+        <input type="text" name="LSTAT" placeholder="LSTAT" required>
+      </div>
+
+      <button type="submit">Predict Price</button>
+    </form>
+
+    {% if predicted %}
+    <div class="result">
+        {{ prediction_text }}
+    </div>
+
+    <button type="button" onclick="window.location.href='/'">
+        Predict Again
+    </button>
+    
+    {% endif %}
+
+    <div class="footer">
+      ML Model • Flask App
+    </div>
+  </div>
+
+</body>
+</html>
